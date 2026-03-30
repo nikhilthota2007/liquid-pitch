@@ -321,7 +321,7 @@
 <div class="slide scrollable" data-slide="5">
   <div class="tag">The Math — Your Menu</div>
   <h2>Let's run the numbers with <span class="hl">your actual prices</span>.</h2>
-  <p style="color:var(--text-secondary);font-size:14px;margin-bottom:8px;">Here's what happens when a student puts $100 into Liquid and your Tier 2 discount is 10%.</p>
+  <p style="color:var(--text-secondary);font-size:14px;margin-bottom:8px;">Here's what happens when a student puts $100 into Liquid and your discount is 10%.</p>
   <div class="vs-container">
     <div class="vs-box" style="border-color:var(--red);">
       <h3 style="color:var(--red);margin-bottom:14px;">❌ Without Liquid</h3>
@@ -333,19 +333,62 @@
     </div>
     <div class="vs-divider">VS</div>
     <div class="vs-box" style="border-color:var(--green);">
-      <h3 style="color:var(--green);margin-bottom:14px;">✅ With Liquid (10% off)</h3>
+      <h3 style="color:var(--green);margin-bottom:14px;">✅ With Liquid (<span id="discountLabel">10</span>% off)</h3>
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">Same student deposits $100 into Liquid. Incentivized to spend at your shop.</p>
-      <div class="vs-item"><span>Chicken Shawarma</span><span style="color:var(--green);font-family:'JetBrains Mono';">$11.69</span></div>
-      <div class="vs-item"><span>Chicken Twister</span><span style="color:var(--green);font-family:'JetBrains Mono';">$10.79</span></div>
-      <div class="vs-item"><span>Chicken Rice Bowl</span><span style="color:var(--green);font-family:'JetBrains Mono';">$9.89</span></div>
-      <div class="vs-item"><span>Kickin' Sandwich</span><span style="color:var(--green);font-family:'JetBrains Mono';">$8.99</span></div>
-      <div class="vs-item"><span>Chicken Rice Bowl</span><span style="color:var(--green);font-family:'JetBrains Mono';">$9.89</span></div>
-      <div class="vs-item"><span>Chicken Shawarma</span><span style="color:var(--green);font-family:'JetBrains Mono';">$11.69</span></div>
-      <div class="vs-total"><span>Your revenue</span><span style="color:var(--green);font-family:'JetBrains Mono';">~$63</span></div>
-      <p class="footnote">6 visits. ~$7 in discounts given, but $40 more revenue earned.</p>
+      <div class="vs-item"><span>Chicken Shawarma</span><span id="p1" style="color:var(--green);font-family:'JetBrains Mono';">$11.69</span></div>
+      <div class="vs-item"><span>Chicken Twister</span><span id="p2" style="color:var(--green);font-family:'JetBrains Mono';">$10.79</span></div>
+      <div class="vs-item"><span>Chicken Rice Bowl</span><span id="p3" style="color:var(--green);font-family:'JetBrains Mono';">$9.89</span></div>
+      <div class="vs-item"><span>Kickin' Sandwich</span><span id="p4" style="color:var(--green);font-family:'JetBrains Mono';">$8.99</span></div>
+      <div class="vs-item"><span>Chicken Rice Bowl</span><span id="p5" style="color:var(--green);font-family:'JetBrains Mono';">$9.89</span></div>
+      <div class="vs-item"><span>Chicken Shawarma</span><span id="p6" style="color:var(--green);font-family:'JetBrains Mono';">$11.69</span></div>
+      <div class="vs-total"><span>Your revenue</span><span id="totalRevenue" style="color:var(--green);font-family:'JetBrains Mono';">~$63</span></div>
+      <p class="footnote" id="visitNote">6 visits. ~$7 in discounts given, but $40 more revenue earned.</p>
     </div>
   </div>
-  <div class="big-num-row" style="margin-top:20px;"><div class="big-num" style="color:var(--accent);">+174%</div><div class="big-label">more revenue per student, per month — even after the discount.</div></div>
+
+  <!-- Interactive slider -->
+  <div style="margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <div>
+        <h3 style="margin-bottom:4px;">Drag to adjust your discount</h3>
+        <p style="font-size:13px;color:var(--text-muted);">Even at higher discounts, you still earn far more than without Liquid.</p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'JetBrains Mono';font-size:36px;font-weight:700;color:var(--accent);" id="sliderValue">10%</div>
+        <div style="font-size:11px;color:var(--text-muted);">discount</div>
+      </div>
+    </div>
+    <input type="range" id="discountSlider" min="5" max="35" value="10" step="1" style="width:100%;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none;cursor:pointer;">
+    <style>
+      #discountSlider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 12px rgba(0,212,170,0.4);}
+      #discountSlider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;box-shadow:0 0 12px rgba(0,212,170,0.4);}
+    </style>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px;font-family:'JetBrains Mono';">
+      <span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
+    </div>
+
+    <!-- Revenue comparison bars -->
+    <div style="margin-top:20px;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+        <div style="width:110px;text-align:right;font-size:12px;color:var(--text-muted);font-weight:500;">Without Liquid</div>
+        <div style="flex:1;height:32px;background:var(--surface-2);border-radius:6px;overflow:hidden;border:1px solid var(--border);position:relative;">
+          <div style="height:100%;width:23%;background:var(--red);border-radius:6px;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono';font-size:11px;font-weight:600;color:var(--bg);">$23</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:110px;text-align:right;font-size:12px;color:var(--accent);font-weight:600;">With Liquid</div>
+        <div style="flex:1;height:32px;background:var(--surface-2);border-radius:6px;overflow:hidden;border:1px solid var(--border);position:relative;">
+          <div id="liquidBar" style="height:100%;width:63%;background:var(--accent);border-radius:6px;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono';font-size:11px;font-weight:600;color:var(--bg);transition:width 0.3s ease;">$63</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="insightText" style="margin-top:16px;padding:14px 18px;background:var(--accent-dim);border:1px solid rgba(0,212,170,0.15);border-radius:10px;">
+      <p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--accent);">+174% more revenue</strong> <span style="color:var(--text-secondary);">— even after giving 10% off, you earn $40 more per student per month.</span></p>
+    </div>
+  </div>
+
+  <div class="big-num-row" style="margin-top:20px;"><div class="big-num" style="color:var(--accent);" id="bigPercent">+174%</div><div class="big-label" id="bigLabel">more revenue per student, per month — even after the discount.</div></div>
 </div>
 
 <!-- SLIDE 6: DISCOUNT TIERS -->
@@ -662,7 +705,7 @@
       <h3 style="font-size:22px;margin-bottom:12px;">Ready to turn College Park students into your regulars?</h3>
       <p style="color:var(--text-secondary);font-size:15px;line-height:1.6;">Let's schedule 15 minutes to walk through the details, set up your tiers, and get you listed. No obligations, no pressure.</p>
       <div style="margin-top:20px;background:var(--surface);border:1px solid var(--accent);border-radius:12px;padding:16px 20px;display:inline-block;">
-        <span style="font-family:'JetBrains Mono';font-size:14px;color:var(--accent);font-weight:600;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b57524a4e525f7b4e565f155e5f4e">[email&#160;protected]</a></span>
+        <span style="font-family:'JetBrains Mono';font-size:14px;color:var(--accent);font-weight:600;">liquid&#64;umd.edu</span>
       </div>
       <p style="font-size:12px;color:var(--text-muted);margin-top:20px;">LIQUID — CONFIDENTIAL</p>
     </div>
@@ -671,16 +714,68 @@
 
 <!-- NAV -->
 <div class="nav">
-  <button id="prev" onclick="nav(-1)">← Prev</button>
+  <button id="prev" onclick="slideNav(-1)">← Prev</button>
   <div class="dots" id="dots"></div>
   <span class="counter" id="counter">1 / 17</span>
-  <button id="next" onclick="nav(1)">Next →</button>
+  <button id="next" onclick="slideNav(1)">Next →</button>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 let cur=0;const slides=document.querySelectorAll('.slide'),total=slides.length,dotsEl=document.getElementById('dots'),counterEl=document.getElementById('counter'),prevBtn=document.getElementById('prev'),nextBtn=document.getElementById('next');
 for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dotsEl.appendChild(d);}
 function go(n){slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');slides[cur].scrollTop=0;dotsEl.children[cur].classList.add('active');counterEl.textContent=`${cur+1} / ${total}`;prevBtn.disabled=cur===0;nextBtn.disabled=cur===total-1;}
-function nav(d){const n=cur+d;if(n>=0&&n<total)go(n);}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nav(1);}if(e.key==='ArrowLeft'){e.preventDefault();nav(-1);}});
-let tx=0;document.a
+function slideNav(d){const n=cur+d;if(n>=0&&n<total)go(n);}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();slideNav(1);}if(e.key==='ArrowLeft'){e.preventDefault();slideNav(-1);}});
+let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;});document.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50)slideNav(d>0?1:-1);});
+prevBtn.disabled=true;
+
+// Discount slider logic
+const prices = [12.99, 11.99, 10.99, 9.99, 10.99, 12.99]; // Shawarma, Twister, Bowl, Sandwich, Bowl, Shawarma
+const priceIds = ['p1','p2','p3','p4','p5','p6'];
+const slider = document.getElementById('discountSlider');
+const baseline = 23; // without Liquid revenue
+
+function updateDiscount(pct) {
+  const disc = pct / 100;
+  const discountedPrices = prices.map(p => p * (1 - disc));
+  const totalRev = discountedPrices.reduce((a, b) => a + b, 0);
+  const totalDiscount = prices.reduce((a, b) => a + b, 0) - totalRev;
+  const gain = totalRev - baseline;
+  const pctGain = Math.round((totalRev - baseline) / baseline * 100);
+
+  // Update item prices
+  priceIds.forEach((id, i) => {
+    document.getElementById(id).textContent = '$' + discountedPrices[i].toFixed(2);
+  });
+
+  // Update labels
+  document.getElementById('discountLabel').textContent = pct;
+  document.getElementById('sliderValue').textContent = pct + '%';
+  document.getElementById('totalRevenue').textContent = '~$' + Math.round(totalRev);
+  document.getElementById('visitNote').textContent = '6 visits. ~$' + Math.round(totalDiscount) + ' in discounts given, but $' + Math.round(gain) + ' more revenue earned.';
+
+  // Update bar
+  const barPct = Math.min((totalRev / 100) * 100, 100);
+  const bar = document.getElementById('liquidBar');
+  bar.style.width = barPct + '%';
+  bar.textContent = '$' + Math.round(totalRev);
+
+  // Update insight text
+  const insightEl = document.getElementById('insightText');
+  if (totalRev > baseline) {
+    insightEl.style.background = 'var(--accent-dim)';
+    insightEl.style.borderColor = 'rgba(0,212,170,0.15)';
+    insightEl.innerHTML = '<p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--accent);">+' + pctGain + '% more revenue</strong> <span style="color:var(--text-secondary);"> \u2014 even at ' + pct + '% off, you earn $' + Math.round(gain) + ' more per student per month.</span></p>';
+  } else {
+    insightEl.style.background = 'var(--red-dim)';
+    insightEl.style.borderColor = 'rgba(255,77,106,0.15)';
+    insightEl.innerHTML = '<p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--red);">Break-even point</strong> <span style="color:var(--text-secondary);"> \u2014 at this discount level you would need more than 6 visits to beat $23.</span></p>';
+  }
+
+  // Update big number
+  document.getElementById('bigPercent').textContent = '+' + pctGain + '%';
+  document.getElementById('bigPercent').style.color = totalRev > baseline ? 'var(--accent)' : 'var(--yellow)';
+}if(slider){slider.addEventListener('input',function(){updateDiscount(parseInt(this.value));});}
+</script>
+</body>
+</html>
