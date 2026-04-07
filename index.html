@@ -360,8 +360,10 @@
     </div>
     <input type="range" id="discountSlider" min="5" max="35" value="10" step="1" style="width:100%;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none;cursor:pointer;">
     <style>
-      #discountSlider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 12px rgba(0,212,170,0.4);}
-      #discountSlider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;box-shadow:0 0 12px rgba(0,212,170,0.4);}
+      #discountSlider::-webkit-slider-thumb,#discountSlider2::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 12px rgba(0,212,170,0.4);}
+      #discountSlider::-moz-range-thumb,#discountSlider2::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;box-shadow:0 0 12px rgba(0,212,170,0.4);}
+      #qtySlider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--purple);cursor:pointer;box-shadow:0 0 12px rgba(124,92,252,0.4);}
+      #qtySlider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--purple);cursor:pointer;border:none;box-shadow:0 0 12px rgba(124,92,252,0.4);}
     </style>
     <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px;font-family:'JetBrains Mono';">
       <span>5%</span><span>10%</span><span>15%</span><span>20%</span><span>25%</span><span>30%</span><span>35%</span>
@@ -391,8 +393,90 @@
   <div class="big-num-row" style="margin-top:20px;"><div class="big-num" style="color:var(--accent);" id="bigPercent">+174%</div><div class="big-label" id="bigLabel">more revenue per student, per month — even after the discount.</div></div>
 </div>
 
+<!-- SLIDE 7: THE MATH (RICE BOWL ONLY — VOLUME SLIDER) -->
+<div class="slide scrollable" data-slide="6">
+  <div class="tag">The Math — Volume Test</div>
+  <h2>Same student, same item. <span class="hl">Different volume.</span></h2>
+  <p style="color:var(--text-secondary);font-size:14px;margin-bottom:8px;">Let's lock the menu to a single item — the Chicken Rice Bowl ($10.99) — and see how many of them a student needs to buy through Liquid for you to come out ahead.</p>
+  <div class="vs-container">
+    <div class="vs-box" style="border-color:var(--red);">
+      <h3 style="color:var(--red);margin-bottom:14px;">❌ Without Liquid</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">Student grabs a Rice Bowl twice that month. The rest of their food budget goes to chains and competitors.</p>
+      <div class="vs-item"><span>Chicken Rice Bowl</span><span style="font-family:'JetBrains Mono';">$10.99</span></div>
+      <div class="vs-item"><span>Chicken Rice Bowl</span><span style="font-family:'JetBrains Mono';">$10.99</span></div>
+      <div class="vs-total"><span>Your revenue</span><span style="color:var(--red);font-family:'JetBrains Mono';">$21.98</span></div>
+      <p class="footnote">2 visits. The other ~$78 goes elsewhere.</p>
+    </div>
+    <div class="vs-divider">VS</div>
+    <div class="vs-box" style="border-color:var(--green);">
+      <h3 style="color:var(--green);margin-bottom:14px;">✅ With Liquid (<span id="discountLabel2">10</span>% off)</h3>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px;">Same student deposits $100 into Liquid. Drag the slider to set how many Rice Bowls they buy from you.</p>
+      <div id="bowlList" style="max-height:200px;overflow-y:auto;">
+        <!-- Rice bowls will be inserted here by JS -->
+      </div>
+      <div class="vs-total"><span>Your revenue</span><span id="totalRevenue2" style="color:var(--green);font-family:'JetBrains Mono';">$49.46</span></div>
+      <p class="footnote" id="visitNote2">5 visits. ~$5.50 in discounts given, but $27.48 more revenue earned.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:24px;gap:20px;">
+    <!-- Discount slider -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div>
+          <h3 style="margin-bottom:2px;font-size:16px;">Your discount</h3>
+          <p style="font-size:12px;color:var(--text-muted);">% off the listed price</p>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'JetBrains Mono';font-size:30px;font-weight:700;color:var(--accent);" id="sliderValue2">10%</div>
+        </div>
+      </div>
+      <input type="range" id="discountSlider2" min="5" max="35" value="10" step="1" style="width:100%;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none;cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono';">
+        <span>5%</span><span>15%</span><span>25%</span><span>35%</span>
+      </div>
+    </div>
+
+    <!-- Quantity slider -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div>
+          <h3 style="margin-bottom:2px;font-size:16px;">Rice Bowls bought</h3>
+          <p style="font-size:12px;color:var(--text-muted);">how many times they visit per month</p>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'JetBrains Mono';font-size:30px;font-weight:700;color:var(--purple);" id="qtyValue">5</div>
+        </div>
+      </div>
+      <input type="range" id="qtySlider" min="0" max="10" value="5" step="1" style="width:100%;height:6px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none;cursor:pointer;">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:4px;font-family:'JetBrains Mono';">
+        <span>0</span><span>2</span><span>4</span><span>5</span><span>6</span><span>8</span><span>10</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison bars -->
+  <div style="margin-top:18px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
+      <div style="width:110px;text-align:right;font-size:12px;color:var(--text-muted);font-weight:500;">Without Liquid</div>
+      <div style="flex:1;height:32px;background:var(--surface-2);border-radius:6px;overflow:hidden;border:1px solid var(--border);">
+        <div style="height:100%;width:22%;background:var(--red);border-radius:6px;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono';font-size:11px;font-weight:600;color:var(--bg);">$21.98</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="width:110px;text-align:right;font-size:12px;color:var(--accent);font-weight:600;">With Liquid</div>
+      <div style="flex:1;height:32px;background:var(--surface-2);border-radius:6px;overflow:hidden;border:1px solid var(--border);">
+        <div id="liquidBar2" style="height:100%;width:50%;background:var(--accent);border-radius:6px;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono';font-size:11px;font-weight:600;color:var(--bg);transition:width 0.3s ease;">$49.46</div>
+      </div>
+    </div>
+    <div id="insightText2" style="margin-top:14px;padding:12px 16px;background:var(--accent-dim);border:1px solid rgba(0,212,170,0.15);border-radius:10px;">
+      <p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--accent);">+125% more revenue</strong> <span style="color:var(--text-secondary);">— at 5 visits and 10% off, you earn $27.48 more per student per month.</span></p>
+    </div>
+  </div>
+</div>
+
 <!-- SLIDE 6: DISCOUNT TIERS -->
-<div class="slide" data-slide="6">
+<div class="slide" data-slide="7">
   <div class="tag purple">Your Discount Tiers</div>
   <h2>You set the discounts. <span class="hl-p">You're in control.</span></h2>
   <div class="two-col">
@@ -430,7 +514,7 @@
 </div>
 
 <!-- SLIDE 7: FOR THE MERCHANT -->
-<div class="slide" data-slide="7">
+<div class="slide" data-slide="8">
   <div class="tag">For the Merchant</div>
   <h2>You sign up. You get paid <span class="hl">directly</span>. You stay in control.</h2>
   <div class="two-col">
@@ -466,7 +550,7 @@
 </div>
 
 <!-- SLIDE 8: OFF-PEAK HOURS -->
-<div class="slide scrollable" data-slide="8">
+<div class="slide scrollable" data-slide="9">
   <div class="tag yellow">Off-Peak Hour Discounts</div>
   <h2>Turn your <span class="hl-y">dead hours</span> into revenue.</h2>
   <div class="two-col">
@@ -513,7 +597,7 @@
 </div>
 
 <!-- SLIDE 8: FLASH SALES -->
-<div class="slide scrollable" data-slide="9">
+<div class="slide scrollable" data-slide="10">
   <div class="tag red">Flash Sales</div>
   <h2>One tap. Instant <span class="hl-r">promotion</span>. Phones light up.</h2>
   <div class="two-col">
@@ -555,29 +639,123 @@
   </div>
 </div>
 
-<!-- SLIDE 9: PICKUP ORDERS -->
-<div class="slide" data-slide="10">
-  <div class="tag blue">Pickup Orders</div>
-  <h2>Students order ahead. <span class="hl-b">You get paid before you cook.</span></h2>
+<!-- SLIDE 11: ONLINE ORDERING FLOW -->
+<div class="slide scrollable" data-slide="11">
+  <div class="tag blue">Online Ordering Flow</div>
+  <h2>Students order ahead. <span class="hl-b">Orders land on your Clover.</span></h2>
   <div class="two-col">
     <div>
-      <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;">Students can browse your menu in the Liquid app and place a pickup order, paying in full at the time of ordering. Whatever discount is active applies automatically.</p>
-      <div class="card-grid" style="grid-template-columns:1fr;margin-top:18px;">
-        <div class="card"><div class="icon">📱</div><h3>Student places order in the app</h3><p>They browse your menu, build their order, and pay through their Liquid balance. Discount calculated and shown before they confirm.</p></div>
-        <div class="card"><div class="icon">🔔</div><h3>Order appears on your dashboard instantly</h3><p>Full order details, total amount, and payment confirmation in real time. You know you've been paid before you start preparing.</p></div>
-        <div class="card"><div class="icon">✅</div><h3>Student picks up. Done.</h3><p>No delivery logistics, no disputes, no waiting. Money hit your Stripe account the moment they ordered.</p></div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;">When a student places an order through the Liquid app, the order is routed directly to your existing Clover device using your merchant Clover ID. There is nothing new to learn — orders appear exactly the same way they would for any other digital order.</p>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;margin-top:14px;">The payment flows separately and automatically into your Stripe connected account. Every dollar a student spends through Liquid lands in your Stripe balance in real time.</p>
+      <div class="callout" style="margin-top:16px;border-color:var(--blue);">
+        <h3 style="color:var(--blue);">Weekly payouts to your bank</h3>
+        <p>Once per week, you can transfer your accumulated Stripe balance to your bank account with a single click — or set it to auto-payout on a schedule that works for you. You stay in full control of your cash flow.</p>
+      </div>
+      <div class="card" style="margin-top:16px;border-color:var(--accent);">
+        <h3 style="color:var(--accent);">No new hardware. No new system.</h3>
+        <p>Liquid plugs directly into the Clover device you already use. No second tablet to manage, no separate kitchen workflow, no staff training. If your team can take a Clover order today, they can take a Liquid order tomorrow.</p>
       </div>
     </div>
     <div>
-      <div class="callout" style="border-color:var(--blue);"><h3 style="color:var(--blue);">This is optional</h3><p>You decide whether to enable pickup ordering. Some merchants prefer walk-in only — that's fine. In-person Liquid payments work the same way, just without advance orders.</p></div>
-      <div class="card" style="margin-top:16px;"><h3>Why pickup matters</h3><p>Students have 15–30 minute windows between classes. If they can order ahead and pick up on their walk, you capture a meal that would've gone to the fastest drive-through nearby. Convenience is how you compete with chains — Liquid gives you that for free.</p></div>
-      <div class="card" style="margin-top:14px;border-color:var(--accent);"><h3 style="color:var(--accent);">Same payments, same dashboard</h3><p>Pickup orders flow through the same Stripe infrastructure as in-person payments. One unified view of all your Liquid revenue.</p></div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-family:'JetBrains Mono';">ONLINE ORDER FLOW</p>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--blue-dim);color:var(--blue);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">1</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Student opens the Liquid app</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Browses your menu, builds their order, sees their discount applied automatically before they confirm.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--blue-dim);color:var(--blue);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">2</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Order routes to your Clover device</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Using your merchant Clover ID. The order appears on the Clover screen exactly like any other digital order.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--blue-dim);color:var(--blue);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">3</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Payment lands in your Stripe account</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">In real time. Discount and Liquid fees (if any) calculated automatically — you receive the net amount.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="background:var(--accent-dim);color:var(--accent);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">4</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Weekly transfer to your bank</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Move accumulated Stripe balance to your bank with one click — or set it to auto-payout on your schedule.</div>
+          </div>
+        </div>
+      </div>
+      <p class="footnote">Same Clover device. Same Stripe account. New revenue stream.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: IN-PERSON ORDERING FLOW -->
+<div class="slide scrollable" data-slide="12">
+  <div class="tag yellow">In-Person Ordering Flow</div>
+  <h2>For walk-in customers — <span class="hl-y">a QR code at checkout</span>. <span style="font-size:0.6em;color:var(--text-muted);font-weight:400;">(tentative)</span></h2>
+  <div class="two-col">
+    <div>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;">When a Liquid student walks into your restaurant and orders at the counter, the experience for you is almost identical to taking a regular customer's order. You ring up the items in your system the way you always do — Liquid then generates a QR code that the student scans with their phone to complete payment through the app.</p>
+      <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;margin-top:14px;">The student's discount is applied automatically inside the app — no math to do at the register, no special steps for your staff. Once the student confirms payment, the order appears on your Clover device and the student receives a digital ticket in the app.</p>
+      <div class="callout" style="margin-top:16px;border-color:var(--yellow);">
+        <h3 style="color:var(--yellow);">Why this matters for your team</h3>
+        <p>Your staff doesn't need to learn anything new. If they can take a normal walk-in order today, they can take a Liquid order tomorrow. The only difference is the customer scans a QR code instead of swiping a card.</p>
+      </div>
+      <div class="card" style="margin-top:16px;border-color:var(--blue);">
+        <h3 style="color:var(--blue);">Same payment flow as online orders</h3>
+        <p>Just like online orders, the payment lands in your Stripe account in real time. You can transfer to your bank weekly. One unified flow, regardless of how the student ordered.</p>
+      </div>
+      <p class="footnote" style="margin-top:14px;"><strong>Note:</strong> The in-person flow is tentative and being refined as we onboard early partners. We will work closely with you to fit it into your existing workflow.</p>
+    </div>
+    <div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-family:'JetBrains Mono';">IN-PERSON ORDER FLOW</p>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--yellow-dim);color:var(--yellow);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">1</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Student walks in and orders</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">They tell you what they want — same as any other customer. You ring up the items in your system as normal.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--yellow-dim);color:var(--yellow);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">2</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">A QR code is generated</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">The student scans it with their Liquid app. The discount is applied automatically — no math needed from you.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--yellow-dim);color:var(--yellow);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">3</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Student confirms payment in the app</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">They get a digital ticket in the Liquid app as confirmation of their order and payment.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;">
+          <div style="background:var(--yellow-dim);color:var(--yellow);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">4</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Order shows up on your Clover</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Same as any other order in your kitchen workflow. Nothing new for your staff to learn.</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="background:var(--accent-dim);color:var(--accent);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono';font-size:13px;font-weight:700;flex-shrink:0;">5</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;">Payment lands in your Stripe account</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Real-time, just like online orders. Weekly bank transfer. Same unified flow.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- SLIDE 10: PAYMENTS -->
-<div class="slide" data-slide="11">
+<div class="slide" data-slide="13">
   <div class="tag">Payments</div>
   <h2>Your money goes <span class="hl">directly to you</span>. Always.</h2>
   <div class="two-col">
@@ -610,7 +788,7 @@
 </div>
 
 <!-- SLIDE 11: DASHBOARD -->
-<div class="slide" data-slide="12">
+<div class="slide" data-slide="14">
   <div class="tag purple">Merchant Dashboard</div>
   <h2>Everything in <span class="hl-p">one place</span>.</h2>
   <p style="color:var(--text-secondary);font-size:14px;">Your merchant dashboard is where you manage your entire Liquid presence.</p>
@@ -628,7 +806,7 @@
 </div>
 
 <!-- SLIDE 12: WHY YOUR MENU -->
-<div class="slide" data-slide="13">
+<div class="slide" data-slide="15">
   <div class="tag">Why Your Restaurant</div>
   <h2>Your menu is <span class="hl">perfectly built</span> for this.</h2>
   <div class="two-col">
@@ -651,7 +829,7 @@
 </div>
 
 <!-- SLIDE 13: DIFFERENTIATION -->
-<div class="slide" data-slide="14">
+<div class="slide" data-slide="16">
   <div class="tag">How We're Different</div>
   <h2>Liquid is <span class="hl">not</span> another DoorDash or Groupon.</h2>
   <div class="card-grid c3">
@@ -663,7 +841,7 @@
 </div>
 
 <!-- SLIDE 14: SCALE -->
-<div class="slide" data-slide="15">
+<div class="slide" data-slide="17">
   <div class="tag">The Opportunity</div>
   <h2>What <span class="hl">100 Liquid students</span> could mean for you.</h2>
   <div class="card-grid c4">
@@ -677,7 +855,7 @@
 </div>
 
 <!-- SLIDE 15: NEXT STEPS -->
-<div class="slide" data-slide="16">
+<div class="slide" data-slide="18">
   <div class="glow-line"></div>
   <h2>Let's get you <span class="hl">started</span>.</h2>
   <p class="subtitle">Joining Liquid as a launch partner is simple, free, and low-risk.</p>
@@ -716,7 +894,7 @@
 <div class="nav">
   <button id="prev" onclick="slideNav(-1)">← Prev</button>
   <div class="dots" id="dots"></div>
-  <span class="counter" id="counter">1 / 17</span>
+  <span class="counter" id="counter">1 / 19</span>
   <button id="next" onclick="slideNav(1)">Next →</button>
 </div>
 
@@ -776,6 +954,87 @@ function updateDiscount(pct) {
   document.getElementById('bigPercent').textContent = '+' + pctGain + '%';
   document.getElementById('bigPercent').style.color = totalRev > baseline ? 'var(--accent)' : 'var(--yellow)';
 }if(slider){slider.addEventListener('input',function(){updateDiscount(parseInt(this.value));});}
+
+// Slide 7: Rice Bowl only with discount + quantity sliders
+const bowlPrice = 10.99;
+const bowlBaseline = 21.98; // 2 bowls without Liquid
+const slider2 = document.getElementById('discountSlider2');
+const qtySlider = document.getElementById('qtySlider');
+const bowlList = document.getElementById('bowlList');
+
+function renderBowlList(qty, discountedPrice) {
+  if (!bowlList) return;
+  if (qty === 0) {
+    bowlList.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:13px;font-style:italic;">No purchases at this volume</div>';
+    return;
+  }
+  let html = '';
+  for (let i = 0; i < qty; i++) {
+    html += '<div class="vs-item"><span>Chicken Rice Bowl</span><span style="color:var(--green);font-family:\'JetBrains Mono\';">$' + discountedPrice.toFixed(2) + '</span></div>';
+  }
+  bowlList.innerHTML = html;
+}
+
+function updateBowl() {
+  if (!slider2 || !qtySlider) return;
+  const pct = parseInt(slider2.value);
+  const qty = parseInt(qtySlider.value);
+  const disc = pct / 100;
+  const discountedPrice = bowlPrice * (1 - disc);
+  const totalRev = discountedPrice * qty;
+  const totalDiscount = (bowlPrice * qty) - totalRev;
+  const gain = totalRev - bowlBaseline;
+  const pctGain = bowlBaseline > 0 ? Math.round((totalRev - bowlBaseline) / bowlBaseline * 100) : 0;
+
+  // Update labels
+  document.getElementById('discountLabel2').textContent = pct;
+  document.getElementById('sliderValue2').textContent = pct + '%';
+  document.getElementById('qtyValue').textContent = qty;
+  document.getElementById('totalRevenue2').textContent = '$' + totalRev.toFixed(2);
+
+  // Update visit note
+  let visitNote;
+  if (qty === 0) {
+    visitNote = '0 visits. No revenue earned this month.';
+  } else if (qty === 1) {
+    visitNote = '1 visit. ~$' + totalDiscount.toFixed(2) + ' in discounts given.';
+  } else {
+    const gainText = gain >= 0 ? '$' + gain.toFixed(2) + ' more' : '$' + Math.abs(gain).toFixed(2) + ' less';
+    visitNote = qty + ' visits. ~$' + totalDiscount.toFixed(2) + ' in discounts given, but ' + gainText + ' revenue earned.';
+  }
+  document.getElementById('visitNote2').textContent = visitNote;
+
+  // Render bowl list
+  renderBowlList(qty, discountedPrice);
+
+  // Update comparison bar
+  const maxRev = 110;
+  const barPct = Math.min((totalRev / maxRev) * 100, 100);
+  const bar = document.getElementById('liquidBar2');
+  bar.style.width = barPct + '%';
+  bar.textContent = '$' + totalRev.toFixed(2);
+
+  // Update insight
+  const insightEl = document.getElementById('insightText2');
+  if (totalRev > bowlBaseline) {
+    insightEl.style.background = 'var(--accent-dim)';
+    insightEl.style.borderColor = 'rgba(0,212,170,0.15)';
+    insightEl.innerHTML = '<p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--accent);">+' + pctGain + '% more revenue</strong> <span style="color:var(--text-secondary);"> \u2014 at ' + qty + ' visits and ' + pct + '% off, you earn $' + gain.toFixed(2) + ' more per student per month.</span></p>';
+  } else if (totalRev === bowlBaseline) {
+    insightEl.style.background = 'var(--yellow-dim)';
+    insightEl.style.borderColor = 'rgba(255,196,77,0.15)';
+    insightEl.innerHTML = '<p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--yellow);">Break-even point</strong> <span style="color:var(--text-secondary);"> \u2014 same revenue as without Liquid at this volume and discount.</span></p>';
+  } else {
+    insightEl.style.background = 'var(--red-dim)';
+    insightEl.style.borderColor = 'rgba(255,77,106,0.15)';
+    const lossText = Math.abs(gain).toFixed(2);
+    insightEl.innerHTML = '<p style="font-size:14px;color:var(--text);margin:0;"><strong style="color:var(--red);">Below break-even</strong> <span style="color:var(--text-secondary);"> \u2014 at ' + qty + ' visit(s) and ' + pct + '% off, you earn $' + lossText + ' less. Need more visits to come out ahead.</span></p>';
+  }
+}
+
+if(slider2){slider2.addEventListener('input',updateBowl);}
+if(qtySlider){qtySlider.addEventListener('input',updateBowl);}
+if(slider2 && qtySlider){updateBowl();}
 </script>
 </body>
 </html>
